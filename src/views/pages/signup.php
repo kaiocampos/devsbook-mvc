@@ -13,7 +13,7 @@
         </div>
     </header>
     <section class="container main">
-        
+          
         <form method="POST" action="<?=$base?>/cadastro">
         <?php if(!empty($flash)):?>
             <div class="flash"><?= $flash;?></div>
@@ -38,6 +38,6 @@
             document.getElementById('birthdate'),
             {mask:'00/00/0000'}
         );
-    </script>
+    </script>    
 </body>
 </html>
