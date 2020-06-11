@@ -14,18 +14,17 @@ class PostController extends Controller
     {
         $this->loggedUser = LoginHandler::checkLogin();
 
-        if ( $this->loggedUser === false) {
+        if ($this->loggedUser === false) {
             $this->redirect('/login');
         }
-        
     }
 
     public function new()
     {
-        
+
         $body = filter_input(INPUT_POST, 'body');
 
-        if($body){
+        if ($body) {
             PostHandler::addPost(
                 $this->loggedUser->id,
                 'text',
@@ -35,5 +34,4 @@ class PostController extends Controller
         }
         $this->redirect('/');
     }
-    
 }

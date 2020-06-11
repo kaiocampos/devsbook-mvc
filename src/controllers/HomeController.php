@@ -14,10 +14,9 @@ class HomeController extends Controller
     {
         $this->loggedUser = LoginHandler::checkLogin();
 
-        if ( $this->loggedUser === false) {
+        if ($this->loggedUser === false) {
             $this->redirect('/login');
         }
-        
     }
 
     public function index()
