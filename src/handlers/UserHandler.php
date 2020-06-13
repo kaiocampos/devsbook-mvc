@@ -4,7 +4,7 @@ namespace src\handlers;
 
 use \src\models\User;
 
-class LoginHandler
+class UserHandler
 {
 
     public static function checkLogin()
