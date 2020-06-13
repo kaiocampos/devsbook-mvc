@@ -25,10 +25,17 @@ class ProfileController extends Controller
 
         if (!empty($atributo['id'])) {
             $id = $atributo['id'];
-        }        
+        }   
         
+        $user = UserHandler::getUser($id, true);
+        
+        if(!$user){
+            $this->redirect('/');
+        }
+
         $this->render('profile',[
-            'loggedUser' => $this->loggedUser
+            'loggedUser' => $this->loggedUser,
+            'user' => $user
         ]);
     }
 }
