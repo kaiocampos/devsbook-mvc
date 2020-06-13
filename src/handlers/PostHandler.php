@@ -92,4 +92,34 @@ class PostHandler
             'currentPage' => $page
         ];
     }
+
+    public static function getPhotosFrom($idUser)
+    {
+        $photosData = Post::select()
+        ->where('id_user', $idUser)
+        ->where('type', 'photo')
+        ->get();
+        
+        $photos = [];       
+        
+        foreach ($photosData as $photo) {
+            $newPost = new Post();
+            $newPost->id = $photo['id'];
+            $newPost->type = $photo['type'];
+            $newPost->created_at = $photo['created_at'];
+            $newPost->body = $photo['body']; 
+
+            // echo "<pre>";
+            // print_r($photosData);
+            // print_r($photo);
+            // print_r($newPost);
+            // echo "</pre>";
+
+            $photos[] = $newPost;
+            
+            
+        }
+
+        return $photos;
+    }
 }

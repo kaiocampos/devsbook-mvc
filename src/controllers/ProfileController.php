@@ -33,6 +33,10 @@ class ProfileController extends Controller
             $this->redirect('/');
         }
 
+        $dateFrom = new \DateTime($user->birthdate);
+        $dateTo = new \DateTime('today');
+        $user->ageYears = $dateFrom->diff($dateTo)->y;
+
         $this->render('profile',[
             'loggedUser' => $this->loggedUser,
             'user' => $user
