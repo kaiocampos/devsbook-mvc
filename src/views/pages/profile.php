@@ -9,26 +9,26 @@
         <div class="row">
             <div class="box flex-1 border-top-flat">
                 <div class="box-body">
-                    <div class="profile-cover" style="background-image: url('media/covers/cover.jpg');"></div>
+                    <div class="profile-cover" style="background-image: url('<?=$base;?>/media/covers/<?=$user->cover;?>');"></div>
                     <div class="profile-info m-20 row">
                         <div class="profile-info-avatar">
-                            <img src="media/avatars/avatar.jpg" />
+                            <img src="<?=$base;?>/media/avatars/<?=$user->avatar;?>" />
                         </div>
                         <div class="profile-info-name">
-                            <div class="profile-info-name-text">Bonieky Lacerda</div>
-                            <div class="profile-info-location">Campina Grande</div>
+                            <div class="profile-info-name-text"><?=$user->name;?></div>
+                            <div class="profile-info-location"><?=$user->city;?></div>
                         </div>
                         <div class="profile-info-data row">
                             <div class="profile-info-item m-width-20">
-                                <div class="profile-info-item-n">129</div>
+                                <div class="profile-info-item-n"><?=count($user->followers);?></div>
                                 <div class="profile-info-item-s">Seguidores</div>
                             </div>
                             <div class="profile-info-item m-width-20">
-                                <div class="profile-info-item-n">363</div>
+                                <div class="profile-info-item-n"><?=count($user->following);?></div>
                                 <div class="profile-info-item-s">Seguindo</div>
                             </div>
                             <div class="profile-info-item m-width-20">
-                                <div class="profile-info-item-n">12</div>
+                                <div class="profile-info-item-n"><?=count($user->photos);?></div>
                                 <div class="profile-info-item-s">Fotos</div>
                             </div>
                         </div>
@@ -45,19 +45,23 @@
                     <div class="box-body">
 
                         <div class="user-info-mini">
-                            <img src="assets/images/calendar.png" />
+                            <img src="<?=$base;?>/assets/images/calendar.png" />
                             01/01/1930 (90 anos)
                         </div>
 
+                        <?php if(!empty($user->city)):?>
                         <div class="user-info-mini">
-                            <img src="assets/images/pin.png" />
-                            Campina Grande, Brasil
+                            <img src="<?=$base;?>/assets/images/pin.png" />
+                            <?=$user->city;?>
                         </div>
+                        <?php endif;?>
 
+                        <?php if(!empty($user->work)):?>
                         <div class="user-info-mini">
-                            <img src="assets/images/work.png" />
-                            B7Web
+                            <img src="<?=$base;?>/assets/images/work.png" />
+                            <?=$user->work;?>
                         </div>
+                        <?php endif;?>
 
                     </div>
                 </div>
@@ -66,7 +70,7 @@
                     <div class="box-header m-10">
                         <div class="box-header-text">
                             Seguindo
-                            <span>(363)</span>
+                            <span><?=count($user->following);?></span>
                         </div>
                         <div class="box-header-buttons">
                             <a href="">ver todos</a>
@@ -74,83 +78,23 @@
                     </div>
                     <div class="box-body friend-list">
 
-                        <div class="friend-icon">
-                            <a href="">
-                                <div class="friend-icon-avatar">
-                                    <img src="media/avatars/avatar.jpg" />
-                                </div>
-                                <div class="friend-icon-name">
-                                    Bonieky
-                                </div>
-                            </a>
-                        </div>
+                        <?php for ($i=0; $i < 9 ; $i++):?>           
 
-                        <div class="friend-icon">
-                            <a href="">
-                                <div class="friend-icon-avatar">
-                                    <img src="media/avatars/avatar.jpg" />
-                                </div>
-                                <div class="friend-icon-name">
-                                    Bonieky
-                                </div>
-                            </a>
-                        </div>
+                            <?php if(isset($user->following[$i])):?> 
 
-                        <div class="friend-icon">
-                            <a href="">
-                                <div class="friend-icon-avatar">
-                                    <img src="media/avatars/avatar.jpg" />
+                                <div class="friend-icon">
+                                    <a href="<?=$base;?>/perfil/<?=$following[$i]->id;?>">
+                                        <div class="friend-icon-avatar">
+                                            <img src="<?=$base;?>/media/avatars/<?=$following[$i]->avatar;?>" />
+                                        </div>
+                                        <div class="friend-icon-name">
+                                        <?=$following[$i]->name;?>
+                                        </div>
+                                    </a>
                                 </div>
-                                <div class="friend-icon-name">
-                                    Bonieky
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="friend-icon">
-                            <a href="">
-                                <div class="friend-icon-avatar">
-                                    <img src="media/avatars/avatar.jpg" />
-                                </div>
-                                <div class="friend-icon-name">
-                                    Bonieky
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="friend-icon">
-                            <a href="">
-                                <div class="friend-icon-avatar">
-                                    <img src="media/avatars/avatar.jpg" />
-                                </div>
-                                <div class="friend-icon-name">
-                                    Bonieky
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="friend-icon">
-                            <a href="">
-                                <div class="friend-icon-avatar">
-                                    <img src="media/avatars/avatar.jpg" />
-                                </div>
-                                <div class="friend-icon-name">
-                                    Bonieky
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="friend-icon">
-                            <a href="">
-                                <div class="friend-icon-avatar">
-                                    <img src="media/avatars/avatar.jpg" />
-                                </div>
-                                <div class="friend-icon-name">
-                                    Bonieky
-                                </div>
-                            </a>
-                        </div>
-
+                                
+                            <?php endif;?>
+                        <?php endfor;?>
                     </div>
                 </div>
 
@@ -161,7 +105,7 @@
                     <div class="box-header m-10">
                         <div class="box-header-text">
                             Fotos
-                            <span>(12)</span>
+                            <span><?=count($user->photos);?></span>
                         </div>
                         <div class="box-header-buttons">
                             <a href="">ver todos</a>
